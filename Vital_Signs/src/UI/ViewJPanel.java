@@ -196,7 +196,27 @@ public class ViewJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldTemperatureActionPerformed
 
     private void btnDeleteVsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteVsActionPerformed
-        tableVS.getSelectedRow();
+        // Step 1: Get index of selected Row
+        int selectedIndex = tableVS.getSelectedRow();
+        
+        // Step 2: Check if index is valid
+        if (selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tableVS.getModel();
+        VitalSigns selectedVitals = (VitalSigns) model.getValueAt(selectedIndex, 0);
+        
+        
+        // Step 3: Implement deletion
+        if (selectedVitals != null) {
+            vitalSignsHistory.removeVitals(selectedVitals);
+            JOptionPane.showMessageDialog(this, "Selected vital signs successfully deleted!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        // Step 4: Update the table
+        populateTable();
     }//GEN-LAST:event_btnDeleteVsActionPerformed
 
 

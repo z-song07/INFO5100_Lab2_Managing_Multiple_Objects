@@ -119,6 +119,8 @@ public class CreateJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        
+
         // Step 1: get the field inputs
         float temperature = Float.parseFloat(fieldTemperature.getText());
         double bloodPressure = Double.parseDouble(fieldBloodPressure.getText());
