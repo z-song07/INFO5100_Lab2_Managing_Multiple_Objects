@@ -119,31 +119,39 @@ public class CreateJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        
+        try {// Step 1: Check if fields are empty
+            if (fieldTemperature.getText().isEmpty() || fieldBloodPressure.getText().isEmpty() || fieldPulse.getText().isEmpty() || fieldDate.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Please fill in all the field", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
 
-        // Step 1: get the field inputs
-        float temperature = Float.parseFloat(fieldTemperature.getText());
-        double bloodPressure = Double.parseDouble(fieldBloodPressure.getText());
-        int pulse = Integer.parseInt(fieldPulse.getText());
-        String date = fieldDate.getText();
-        
-        // Step 2: create new vital sign and add to the vitalSignsHistory list
-        VitalSigns newVs = vitalSignsHistory.addNewVitals();
-        
-        // Step 3: set the new vital sign values
-        newVs.setBloodPressure(bloodPressure);
-        newVs.setDate(date);
-        newVs.setPulse(pulse);
-        newVs.setTemperature(temperature);
-        
-        // Step 4: Show comfirmation dialog
-        JOptionPane.showMessageDialog(this, "New vital signs created", "Success", JOptionPane.INFORMATION_MESSAGE);
-        
-        // Step 5: Clear the fields
-        fieldTemperature.setText("");
-        fieldBloodPressure.setText("");
-        fieldPulse.setText("");
-        fieldDate.setText("");
+            // Step 2: convert the field inputs
+            float temperature = Float.parseFloat(fieldTemperature.getText());
+            double bloodPressure = Double.parseDouble(fieldBloodPressure.getText());
+            int pulse = Integer.parseInt(fieldPulse.getText());
+            String date = fieldDate.getText();
+
+            // Step 3: create new vital sign and add to the vitalSignsHistory list
+            VitalSigns newVs = vitalSignsHistory.addNewVitals();
+
+            // Step 4: set the new vital sign values
+            newVs.setBloodPressure(bloodPressure);
+            newVs.setDate(date);
+            newVs.setPulse(pulse);
+            newVs.setTemperature(temperature);
+
+            // Step 5: Show comfirmation dialog
+            JOptionPane.showMessageDialog(this, "New vital signs created", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            // Step 6: Clear the fields
+            fieldTemperature.setText("");
+            fieldBloodPressure.setText("");
+            fieldPulse.setText("");
+            fieldDate.setText("");
+        } catch (NumberFormatException e) {
+            // Catch error if the format is incorrect
+            JOptionPane.showMessageDialog(this, "Please enter the valid format for the fields", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
 
