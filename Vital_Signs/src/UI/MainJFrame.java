@@ -4,6 +4,8 @@
  */
 package UI;
 
+import model.VitalSignsHistory;
+
 /**
  *
  * @author csong
@@ -12,11 +14,13 @@ public class MainJFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainJFrame.class.getName());
 
+    VitalSignsHistory vitalSignsHistory;
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
+        vitalSignsHistory = new VitalSignsHistory();
     }
 
     /**
@@ -99,7 +103,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnCreateVitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateVitalActionPerformed
         // initiate the CreateJPanel
-        CreateJPanel createJPanel = new CreateJPanel();
+        CreateJPanel createJPanel = new CreateJPanel(vitalSignsHistory);
         
         // redirect to the createJPanel element
         splitPane.setRightComponent(createJPanel);
@@ -107,7 +111,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnViewVitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewVitalsActionPerformed
         // initiate the viewJPanel
-        ViewJPanel viewJPanel = new ViewJPanel();
+        ViewJPanel viewJPanel = new ViewJPanel(vitalSignsHistory);
         
         // redirect to the viewJPanel element
         splitPane.setRightComponent(viewJPanel);

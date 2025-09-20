@@ -4,17 +4,23 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
+import model.VitalSignsHistory;
+import model.VitalSigns;
+
 /**
  *
  * @author csong
  */
 public class CreateJPanel extends javax.swing.JPanel {
 
+    VitalSignsHistory vitalSignsHistory;
     /**
      * Creates new form CreateJPanel
      */
-    public CreateJPanel() {
+    public CreateJPanel(VitalSignsHistory vitalSignsHistory) {
         initComponents();
+        this.vitalSignsHistory = vitalSignsHistory;
     }
 
     /**
@@ -51,6 +57,11 @@ public class CreateJPanel extends javax.swing.JPanel {
         lblDate.setText("Date");
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -106,6 +117,32 @@ public class CreateJPanel extends javax.swing.JPanel {
                 .addContainerGap(313, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // Step 1: get the field inputs
+        float temperature = Float.parseFloat(fieldTemperature.getText());
+        double bloodPressure = Double.parseDouble(fieldBloodPressure.getText());
+        int pulse = Integer.parseInt(fieldPulse.getText());
+        String date = fieldDate.getText();
+        
+        // Step 2: create new vital sign and add to the vitalSignsHistory list
+        VitalSigns newVs = vitalSignsHistory.addNewVitals();
+        
+        // Step 3: set the new vital sign values
+        newVs.setBloodPressure(bloodPressure);
+        newVs.setDate(date);
+        newVs.setPulse(pulse);
+        newVs.setTemperature(temperature);
+        
+        // Step 4: Show comfirmation dialog
+        JOptionPane.showMessageDialog(this, "New vital signs created", "Success", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Step 5: Clear the fields
+        fieldTemperature.setText("");
+        fieldBloodPressure.setText("");
+        fieldPulse.setText("");
+        fieldDate.setText("");
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

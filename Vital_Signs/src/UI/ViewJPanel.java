@@ -4,17 +4,26 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.VitalSigns;
+import model.VitalSignsHistory;
+
 /**
  *
  * @author csong
  */
 public class ViewJPanel extends javax.swing.JPanel {
 
+    VitalSignsHistory vitalSignsHistory;
     /**
      * Creates new form ViewJPanel
      */
-    public ViewJPanel() {
+    public ViewJPanel(VitalSignsHistory vitalSignsHistory) {
         initComponents();
+        this.vitalSignsHistory = vitalSignsHistory;
+        
+        populateTable();
     }
 
     /**
@@ -26,21 +35,199 @@ public class ViewJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblTitle = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableVS = new javax.swing.JTable();
+        btnViewVs = new javax.swing.JButton();
+        btnDeleteVs = new javax.swing.JButton();
+        lblTemperature = new javax.swing.JLabel();
+        lblBloodPressure = new javax.swing.JLabel();
+        lblPulse = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
+        fieldTemperature = new javax.swing.JTextField();
+        fieldBloodPressure = new javax.swing.JTextField();
+        fieldPulse = new javax.swing.JTextField();
+        fieldDate = new javax.swing.JTextField();
+
         setBackground(new java.awt.Color(255, 255, 204));
+
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("View Vital Signs");
+
+        tableVS.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Date", "Temperature", "Blood Pressure", "Pulse"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableVS);
+
+        btnViewVs.setText("View");
+        btnViewVs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewVsActionPerformed(evt);
+            }
+        });
+
+        btnDeleteVs.setText("Delete");
+        btnDeleteVs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteVsActionPerformed(evt);
+            }
+        });
+
+        lblTemperature.setText("Temperature:");
+
+        lblBloodPressure.setText("Blood Pressure:");
+
+        lblPulse.setText("Pulse:");
+
+        lblDate.setText("Date:");
+
+        fieldTemperature.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldTemperatureActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnViewVs)
+                .addGap(26, 26, 26)
+                .addComponent(btnDeleteVs)
+                .addGap(15, 15, 15))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDate)
+                    .addComponent(lblPulse)
+                    .addComponent(lblBloodPressure)
+                    .addComponent(lblTemperature))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldPulse, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeleteVs)
+                    .addComponent(btnViewVs))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTemperature)
+                    .addComponent(fieldTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBloodPressure)
+                    .addComponent(fieldBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPulse)
+                    .addComponent(fieldPulse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDate)
+                    .addComponent(fieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnViewVsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewVsActionPerformed
+        int selectedIndex = tableVS.getSelectedRow();
+        
+        // check index
+        // if row not selected, display warning message
+        if (selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return; //stop code execution
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tableVS.getModel();
+        VitalSigns selectedVitals = (VitalSigns) model.getValueAt(selectedIndex, 0); // convert the object back to vitalsigns
+        
+        if (selectedVitals != null) {
+            fieldTemperature.setText(Float.toString(selectedVitals.getTemperature()));
+            fieldPulse.setText(Integer.toString(selectedVitals.getPulse()));
+            fieldDate.setText(selectedVitals.getDate());
+            fieldBloodPressure.setText(Double.toString(selectedVitals.getBloodPressure()));
+        }    
+    }//GEN-LAST:event_btnViewVsActionPerformed
+
+    private void fieldTemperatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldTemperatureActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldTemperatureActionPerformed
+
+    private void btnDeleteVsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteVsActionPerformed
+        tableVS.getSelectedRow();
+    }//GEN-LAST:event_btnDeleteVsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeleteVs;
+    private javax.swing.JButton btnViewVs;
+    private javax.swing.JTextField fieldBloodPressure;
+    private javax.swing.JTextField fieldDate;
+    private javax.swing.JTextField fieldPulse;
+    private javax.swing.JTextField fieldTemperature;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBloodPressure;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblPulse;
+    private javax.swing.JLabel lblTemperature;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JTable tableVS;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tableVS.getModel();
+        model.setRowCount(0); // clean up the table
+        
+        for (VitalSigns vs: vitalSignsHistory.getHistory()) {
+            Object[] row = new Object[4]; // In the Columns settings for the Table we set type to OBject
+            row[0] = vs;
+            row[1] = vs.getTemperature();
+            row[2] = vs.getBloodPressure();
+            row[3] = vs.getPulse();
+            
+            model.addRow(row);
+        }
+    }
 }

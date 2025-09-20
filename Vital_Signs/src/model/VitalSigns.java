@@ -48,4 +48,9 @@ public class VitalSigns {
         this.pulse = pulse;
     }
 
+    // instead of return the instance as string, return date
+    @Override
+    public String toString() {
+        return getDate();
+    }
 }
