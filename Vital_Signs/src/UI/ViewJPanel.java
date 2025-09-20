@@ -55,6 +55,7 @@ public class ViewJPanel extends javax.swing.JPanel {
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("View Vital Signs");
 
+        tableVS.setBackground(new java.awt.Color(255, 204, 204));
         tableVS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
